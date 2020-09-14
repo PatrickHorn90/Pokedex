@@ -3,12 +3,23 @@ import Link from "@material-ui/core/Link";
 import { Typography, CircularProgress } from "@material-ui/core";
 import toFirstCharUppercase from "./constants";
 import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() => ({
+  pokemonContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+}));
 
 const Pokemon = (props) => {
   const { match } = props;
   const { params } = match;
   const { pokemonId } = params;
   const [pokemonData, setPokemonData] = useState(undefined);
+
+  const classes = useStyles();
 
   useEffect(() => {
     axios
@@ -23,15 +34,14 @@ const Pokemon = (props) => {
   }, [pokemonId]);
 
   const generatePokemonJSX = () => {
-    const { name, id, species, height, weight, types, sprites } = pokemonData;
+    const { name, id, species, height, weight, types } = pokemonData;
     const fullImageURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-    const { front_default } = sprites;
+
     return (
-      <>
+      <div className={classes.pokemonContainer}>
         <Link href={"http://localhost:3000/"}>Back to Pokedex</Link>
-        <Typography variant="h1">
+        <Typography variant="h2">
           {`${id}.`} {toFirstCharUppercase(name)}
-          <img src={front_default} alt="front_default_sprite" />
         </Typography>
         <img
           style={{ width: "300px", height: "300px" }}
@@ -55,7 +65,7 @@ const Pokemon = (props) => {
             )}`}</Typography>
           );
         })}
-      </>
+      </div>
     );
   };
   if (pokemonData === undefined) return <CircularProgress />;
