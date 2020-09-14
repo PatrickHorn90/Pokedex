@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
   cardContents: {
     alignItems: "center",
     display: "flex",
-    marginTop: "15px",
+    marginTop: "5px",
   },
   cardLeftSide: {},
   cardRightSide: {},
@@ -64,7 +64,7 @@ const Pokemon = (props) => {
           Back to Pokedex
         </Link>
         <div className={classes.pokemonContainer}>
-          <Typography variant="h2" style={{ marginTop: "30px" }}>
+          <Typography variant="h2" style={{ marginTop: "50px" }}>
             {`${id}.`} {toFirstCharUppercase(name)}
           </Typography>
           <div className={classes.cardContents}>
