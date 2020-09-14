@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(() => ({
   pokemonContainer: {
     alignItems: "center",
+    backgroundColor: "lightGrey",
     borderWidth: "3px",
     borderColor: "black",
     borderStyle: "solid",
