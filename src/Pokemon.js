@@ -7,10 +7,24 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   pokemonContainer: {
+    alignItems: "center",
+    borderWidth: "3px",
+    borderColor: "black",
+    borderStyle: "solid",
+    borderRadius: "60%",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    margin: "10px",
+    width: "50%",
+    height: "500px",
   },
+  cardContents: {
+    alignItems: "center",
+    display: "flex",
+    marginTop: "15px",
+  },
+  cardLeftSide: {},
+  cardRightSide: {},
 }));
 
 const Pokemon = (props) => {
@@ -38,33 +52,51 @@ const Pokemon = (props) => {
     const fullImageURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
     return (
-      <div className={classes.pokemonContainer}>
-        <Link href={"http://localhost:3000/"}>Back to Pokedex</Link>
-        <Typography variant="h2">
-          {`${id}.`} {toFirstCharUppercase(name)}
-        </Typography>
-        <img
-          style={{ width: "300px", height: "300px" }}
-          alt="front_default"
-          src={fullImageURL}
-        />
-        <Typography variant="h3">Pokemon info</Typography>
-        <Typography>
-          {"Species: "}
-          <Link href={species.url}>{toFirstCharUppercase(species.name)}</Link>
-        </Typography>
-        <Typography>Height: {height}</Typography>
-        <Typography>Weight: {weight}</Typography>
-        <Typography variant="h6">Type(s): </Typography>
-        {types.map((typeInfo) => {
-          const { type } = typeInfo;
-          const { name } = type;
-          return (
-            <Typography key={name}>{`${toFirstCharUppercase(
-              name
-            )}`}</Typography>
-          );
-        })}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Link style={{ margin: "10px" }} href={"http://localhost:3000/"}>
+          Back to Pokedex
+        </Link>
+        <div className={classes.pokemonContainer}>
+          <Typography variant="h2" style={{ marginTop: "30px" }}>
+            {`${id}.`} {toFirstCharUppercase(name)}
+          </Typography>
+          <div className={classes.cardContents}>
+            <div className={classes.cardLeftSide}>
+              <img
+                style={{ width: "300px", height: "300px" }}
+                alt="front_default"
+                src={fullImageURL}
+              />
+            </div>
+            <div className={classes.cardRightSide}>
+              <Typography variant="h3">Pokemon Info</Typography>
+              <Typography>
+                {"Species: "}
+                <Link href={species.url}>
+                  {toFirstCharUppercase(species.name)}
+                </Link>
+              </Typography>
+              <Typography>Height: {height}</Typography>
+              <Typography>Weight: {weight}</Typography>
+              <Typography variant="h6">Type(s): </Typography>
+              {types.map((typeInfo) => {
+                const { type } = typeInfo;
+                const { name } = type;
+                return (
+                  <Typography key={name}>{`${toFirstCharUppercase(
+                    name
+                  )}`}</Typography>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </div>
     );
   };
